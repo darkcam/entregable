@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<header th:replace="layout/layout :: header"></header>
+
+<div class="container py-4">
+  <div class="card bg-light">
+    <div class="card-header" th:text="${titulo}"></div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item" th:text="${deuda.banco}"></li>
+        <li class="list-group-item" th:text="${deuda.deuda}"></li>
+        <li class="list-group-item" th:text="${deuda.cuotas}"></li>
+        <li class="list-group-item" th:text="${deuda.abono}"></li>
+      </ul>
+      <button type="submit" onclick="cancelarFomulario()" class="btn btn-danger mt-3">Atras</button>
+    </div>
+  </div>
+</div>
+
+
+<footer th:replace="layout/layout :: footer"></footer>
+<script type="text/javascript">
+  function cancelarFomulario(){
+      window.location = "[[@{/deudas}]]";
+  }
+</script>
+</body>
+</html>

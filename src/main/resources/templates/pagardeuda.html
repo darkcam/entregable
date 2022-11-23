@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<header th:replace="layout/layout :: header"></header>
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+      <h1 class="text-center" th:text="${titulo}"></h1>
+      <div class="card-body">
+        <form th:action="@{/pagardeuda}" th:object="${deuda}" method="post">
+          <input type="hidden" th:field="*{id_deuda}" th:value="${deuda.id_deuda}">
+          <div class="form-group">
+            <label>Banco</label>
+            <input type="text" th:field="*{banco}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('banco')}" th:errors="*{banco}"></small>
+          </div>
+          <div class="form-group">
+            <label>Valor Credito</label>
+            <input type="text"  th:field="*{deuda}" class="form-control" th:errorclass="'form-control alert-danger'" readonly/>
+            <small class="form-text text-danger"  th:if="${#fields.hasErrors('deuda')}" th:errors="*{deuda}"></small>
+          </div>
+          <div class="form-group">
+            <label>cuotas</label>
+            <input type="text" th:field="*{cuotas}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('cuotas')}" th:errors="*{cuotas}"></small>
+          </div>
+          <div class="form-group">
+            <label>Valor Abono</label>
+            <input type="text" th:field="*{abono}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('abono')}" th:errors="*{abono}"></small>
+          </div>
+          <div class="box-footer mt-3">
+            <input type="submit" value="Pagar" class="btn btn-success">
+            <button type="submit" onclick="cancelarFomulario()" class="btn btn-danger">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer th:replace="layout/layout :: footer"></footer>
+<script type="text/javascript">
+  function cancelarFomulario(){
+      window.location = "[[@{/deudas}]]";
+  }
+</script>
+</body>
+</html>
